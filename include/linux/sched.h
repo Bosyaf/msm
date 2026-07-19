@@ -584,10 +584,24 @@ struct sched_entity {
 	struct sched_avg		avg;
 #endif
 
+	#ifdef CONFIG_SCHED_BORE
+	ANDROID_KABI_USE(1, u64 burst_time);
+	_ANDROID_KABI_REPLACE(_ANDROID_KABI_RESERVE(2),
+		struct {
+			u8 prev_burst_penalty;
+			u8 curr_burst_penalty;
+			u8 burst_penalty;
+			u8 burst_score;
+		}
+	);
+	ANDROID_KABI_USE2(3, u8 child_burst, u32 child_burst_cnt);
+	ANDROID_KABI_USE(4, u64 child_burst_last_cached);
+#else
 	ANDROID_KABI_RESERVE(1);
 	ANDROID_KABI_RESERVE(2);
 	ANDROID_KABI_RESERVE(3);
 	ANDROID_KABI_RESERVE(4);
+#endif
 };
 
 struct sched_rt_entity {
@@ -1551,6 +1565,10 @@ struct task_struct {
 	ANDROID_KABI_USE(1, unsigned int saved_state);
 	ANDROID_KABI_USE(2, struct task_dma_buf_info *dmabuf_info);
 	ANDROID_KABI_RESERVE(3);
+	ANDROID_KABI_USE(3, struct {
+		/* Save user-dumpable when mm goes away */
+		unsigned	user_dumpable:1;
+		});
 	ANDROID_KABI_RESERVE(4);
 	ANDROID_KABI_RESERVE(5);
 	ANDROID_KABI_RESERVE(6);
