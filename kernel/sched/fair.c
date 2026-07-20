@@ -73,7 +73,7 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(sched_stat_runtime);
  *
  * (to see the precise effective timeslice length of your workload,
  *  run vmstat and monitor the context-switches (cs) field)
-*
+ *
  * (BORE default: 24ms constant, units: nanoseconds)
  * (CFS  default: 6ms * (1 + ilog(ncpus)), units: nanoseconds)
  * (default: 6ms * (1 + ilog(ncpus)), units: nanoseconds)
