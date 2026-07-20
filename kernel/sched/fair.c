@@ -8260,14 +8260,8 @@ static void yield_task_fair(struct rq *rq)
 	 * so we don't do microscopic update in schedule()
 	 * and double the fastpath cost.
 	 */
-	if (IS_ENABLED(CONFIG_SCHED_BORE) || curr->policy != SCHED_BATCH)		
-		/*
-		 * Tell update_rq_clock() that we've just updated,
-		 * so we don't do microscopic update in schedule()
-		 * and double the fastpath cost.
-		 */
+	if (IS_ENABLED(CONFIG_SCHED_BORE) || curr->policy != SCHED_BATCH)
 		rq_clock_skip_update(rq);
-	}
 
 	set_skip_buddy(se);
 }
