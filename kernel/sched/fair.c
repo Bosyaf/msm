@@ -8247,17 +8247,7 @@ static void yield_task_fair(struct rq *rq)
 	/*
 	 * Update run-time statistics of the 'current'.
 	 */
-	if (IS_ENABLED(CONFIG_SCHED_BORE) || curr->policy != SCHED_BATCH)	
-	if (unlikely(rq->nr_running == 1))
-		return;
-
-	clear_buddies(cfs_rq, se);
-
-	if (curr->policy != SCHED_BATCH) {
-		update_rq_clock(rq);
-		/*
-		 * Update run-time statistics of the 'current'.
-		 */
+	if (IS_ENABLED(CONFIG_SCHED_BORE) || curr->policy != SCHED_BATCH)
 		update_curr(cfs_rq);
 #ifdef CONFIG_SCHED_BORE
 	restart_burst(se);
