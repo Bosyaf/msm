@@ -1072,7 +1072,7 @@ static void update_curr(struct cfs_rq *cfs_rq)
 #ifdef CONFIG_SCHED_BORE
 	curr->burst_time += delta_exec;
 	update_burst_penalty(curr);
-#endif	
+#endif
 	curr->vruntime += calc_delta_fair(delta_exec, curr);
 	update_min_vruntime(cfs_rq);
 
@@ -6419,7 +6419,7 @@ static void dequeue_task_fair(struct rq *rq, struct task_struct *p, int flags)
 			update_curr(cfs_rq);
 		restart_burst(se);
 	}
-#endif	
+#endif
 
 	for_each_sched_entity(se) {
 		cfs_rq = cfs_rq_of(se);
@@ -12220,7 +12220,7 @@ static void task_fork_fair(struct task_struct *p)
 	}
 #ifdef CONFIG_SCHED_BORE
 	update_burst_score(se);
-#endif	
+#endif
 	place_entity(cfs_rq, se, 1);
 
 	if (sysctl_sched_child_runs_first && curr && entity_before(curr, se)) {
